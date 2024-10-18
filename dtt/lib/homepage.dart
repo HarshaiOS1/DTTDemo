@@ -22,12 +22,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle featureTextStyle = TextStyle(
-        fontSize: 10.sp,
-        fontFamily: 'GothamSSM',
-        fontWeight: FontWeight.w400,
-        color: Colors.grey);
-
     return Scaffold(
       backgroundColor: Colors.white70,
       appBar: AppBar(
@@ -42,16 +36,20 @@ class _HomePageState extends State<HomePage> {
         centerTitle: false,
       ),
       body: Column(children: [
-        // Search Bar
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: TextField(
             decoration: InputDecoration(
               hintText: 'Search for a home',
-              suffixIcon: const Icon(Icons.search),
+              contentPadding:
+                  EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.w),
+              suffixIcon: const Icon(Icons.search, color: Colors.grey),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8.0),
+                borderSide: BorderSide.none,
               ),
+              filled: true,
+              fillColor: Colors.grey[350],
             ),
             onChanged: (value) {
               Provider.of<HouseProvider>(context, listen: false)
