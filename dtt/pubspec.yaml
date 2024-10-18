@@ -72,6 +72,39 @@ flutter:
     - assets/images/2.0x/
     - assets/images/3.0x/
     - assets/images/4.0x/
+  fonts:
+    - family: GothamSSM
+      fonts:
+        - asset: assets/fonts/GothamSSm-Black.otf
+          weight: 900
+        - asset: assets/fonts/GothamSSm-BlackItalic.otf
+          style: italic
+          weight: 900
+        - asset: assets/fonts/GothamSSm-Bold.otf
+          weight: 700
+        - asset: assets/fonts/GothamSSm-BoldItalic.otf
+          style: italic
+          weight: 700
+        - asset: assets/fonts/GothamSSm-Book.otf
+          weight: 600
+        - asset: assets/fonts/GothamSSm-BookItalic.otf
+          weight: 600
+          style: italic
+        - asset: assets/fonts/GothamSSm-Medium.otf
+          weight: 500
+        - asset: assets/fonts/GothamSSm-MediumItalic.otf
+          weight: 500
+          style: italic
+        - asset: assets/fonts/GothamSSm-Light.otf
+          weight: 300
+        - asset: assets/fonts/GothamSSm-LightItalic.otf
+          weight: 300
+          style: italic
+        - asset: assets/fonts/GothamSSm-XLight.otf
+          weight: 200
+        - asset: assets/fonts/GothamSSm-XLightItalic.otf
+          style: italic
+          weight: 200
 
 flutter_native_splash:
   color: "#e65541"
