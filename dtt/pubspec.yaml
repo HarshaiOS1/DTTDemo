@@ -38,6 +38,10 @@ dependencies:
   flutter_native_splash: ^2.4.0
   provider: ^6.1.2
   http: ^1.2.0
+  flutter_screenutil:
+  url_launcher:
+  intl:
+
 
 dev_dependencies:
   flutter_test:
@@ -63,6 +67,11 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/images/1.0x/
+    - assets/images/1.5x/
+    - assets/images/2.0x/
+    - assets/images/3.0x/
+    - assets/images/4.0x/
 
 flutter_native_splash:
   color: "#e65541"
