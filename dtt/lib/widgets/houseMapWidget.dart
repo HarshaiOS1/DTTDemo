@@ -30,6 +30,7 @@ class _HouseMapWidgetState extends State<HouseMapWidget> {
       padding: const EdgeInsets.all(5.0),
       alignment: Alignment.center,
       child: GoogleMap(
+        zoomControlsEnabled: true,
         onMapCreated: (GoogleMapController controller) {
           _mapController = controller;
           _mapController.animateCamera(

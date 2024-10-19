@@ -21,6 +21,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.white70,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
+        scrolledUnderElevation: 0.0,
         title: Text(
           "DTT REAL ESTATE",
           style: TextStyle(
