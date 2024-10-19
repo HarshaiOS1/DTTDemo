@@ -14,11 +14,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  @override
-  void initState() {
-    super.initState();
-    Provider.of<HouseProvider>(context, listen: false).loadHouses();
-  }
 
   @override
   Widget build(BuildContext context) {

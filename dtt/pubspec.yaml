@@ -40,8 +40,9 @@ dependencies:
   http: ^1.2.0
   flutter_screenutil:
   url_launcher:
+  google_maps_flutter:
   intl:
-
+  geolocator:
 
 dev_dependencies:
   flutter_test:
