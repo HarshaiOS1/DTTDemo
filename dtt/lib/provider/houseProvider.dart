@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../model/houseModel.dart';
 import '../services/services.dart';
 
+/// A provider class for managing house data and connectivity status.
 class HouseProvider extends ChangeNotifier {
   List<House> _houses = [];
   List<House> _filteredHouses = [];
@@ -17,14 +18,18 @@ class HouseProvider extends ChangeNotifier {
   late StreamSubscription<List<ConnectivityResult>> _connectivitySubscription;
 
   List<House> get houses => _houses;
+
   List<House> get filteredHouses => _filteredHouses;
+
   bool get isLoading => _isLoading;
+
   bool get hasConnection => _hasConnection;
 
   HouseProvider() {
     initializeConnectivity();
   }
 
+  /// Loads the houses from the API and updates the state.
   Future<void> loadHouses() async {
     _isLoading = true;
     notifyListeners();
@@ -44,6 +49,9 @@ class HouseProvider extends ChangeNotifier {
     });
   }
 
+  /// Filters houses based on the provided search query.
+  ///
+  /// Updates the [_filteredHouses] list based on matches with the city or zip.
   void filterHouses(String query) {
     _searchQuery = query.toLowerCase();
     if (_searchQuery.isNotEmpty) {
@@ -59,7 +67,8 @@ class HouseProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-// TODO : create network provide and have other providers listen to network proxy provider
+  // TODO : create network provide and have other providers listen to network proxy provider
+  /// Initializes connectivity status and sets up a listener for connectivity changes.
   Future<void> initializeConnectivity() async {
     List<ConnectivityResult> initialStatus =
         await _connectivity.checkConnectivity();
@@ -78,6 +87,7 @@ class HouseProvider extends ChangeNotifier {
         _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
   }
 
+  /// Updates the connection status based on the new results from the connectivity listener.
   void _updateConnectionStatus(List<ConnectivityResult> results) {
     _connectionStatus = results;
     _hasConnection = results.any((result) => result != ConnectivityResult.none);

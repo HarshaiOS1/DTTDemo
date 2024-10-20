@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+/// InformationPage displays brief information about DTT and its official website.
+
 class InformationPage extends StatelessWidget {
   const InformationPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    /// Builds the InformationPage UI, which includes:
+    /// - Brief introduction about the company.
+    /// - Company Logo and official clickable website link is shown
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -47,41 +52,42 @@ class InformationPage extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                      Image.asset(
-                        'assets/images/dtt_banner.png',
-                        width: 100.sp,
-                        height: 100.sp,
-                      ),
+                    Image.asset(
+                      'assets/images/dtt_banner.png',
+                      width: 100.sp,
+                      height: 100.sp,
+                    ),
                     SizedBox(width: 10.sp),
                     Flexible(
                       child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          'by DTT',
-                          style: TextStyle(
-                            fontSize: 10.sp,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () async {
-                            final Uri url = Uri.parse('https://www.d-tt.nl');
-                            if (!await launchUrl(url)) {
-                              throw Exception('Could not launch $url');
-                            }
-                          },
-                          child: Text(
-                            'd-tt.nl',
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            'by DTT',
                             style: TextStyle(
-                              fontSize: 9.sp,
-                              color: Colors.blue,
-
+                              fontSize: 10.sp,
+                              fontWeight: FontWeight.normal,
                             ),
                           ),
-                        ),
-                      ],
-                    ),
+
+                          /// Clickable link to DTT's official website using 'urllaucher' packaage.
+                          InkWell(
+                            onTap: () async {
+                              final Uri url = Uri.parse('https://www.d-tt.nl');
+                              if (!await launchUrl(url)) {
+                                throw Exception('Could not launch $url');
+                              }
+                            },
+                            child: Text(
+                              'd-tt.nl',
+                              style: TextStyle(
+                                fontSize: 9.sp,
+                                color: Colors.blue,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
