@@ -1,9 +1,13 @@
 import 'package:dtt/services/constants.dart';
 import 'package:dtt/widgets/houseMapWidget.dart';
+import 'package:dtt/widgets/houseWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'model/houseModel.dart';
+import '../model/houseModel.dart';
+
+/// HouseDetailsPage displays detailed information about a selected house.
+/// It shows the house's image, price, description, and location on a map.
 
 class HouseDetailsPage extends StatefulWidget {
   final House house;
@@ -15,6 +19,11 @@ class HouseDetailsPage extends StatefulWidget {
 }
 
 class _HouseDetailsPageState extends State<HouseDetailsPage> {
+  /// Builds the HouseDetailsPage UI, which includes:
+  /// - The house's image at the top.
+  /// - The house's price, bedrooms, bathrooms, and size.
+  /// - A description of the house.
+  /// - A map widget showing the house's location.
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,6 +43,8 @@ class _HouseDetailsPageState extends State<HouseDetailsPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      /// Displays the price, number of bedrooms, bathrooms, and size of the house.
+
                       Row(
                         children: [
                           Text(
@@ -56,8 +67,6 @@ class _HouseDetailsPageState extends State<HouseDetailsPage> {
                           SizedBox(width: 4.w),
                           Text('${widget.house.size} m²'),
                           SizedBox(width: 16.w),
-                          Icon(Icons.location_on, size: 18.sp),
-                          SizedBox(width: 4.w),
                         ],
                       ),
                       SizedBox(height: 16.h),
@@ -74,6 +83,8 @@ class _HouseDetailsPageState extends State<HouseDetailsPage> {
                         style: TextStyle(fontSize: 16.sp),
                       ),
                       SizedBox(height: 20.h),
+
+                      /// Displays the location header and the map widget.
                       Text(
                         'Location',
                         style: TextStyle(

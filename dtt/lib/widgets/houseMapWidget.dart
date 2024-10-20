@@ -3,11 +3,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:dtt/services/utils.dart';
 
+/// HouseMapWidget displays a Google Map centered on the house's location.
+/// It shows a marker for the house's position and allows users to launch navigation to the house.
+
 class HouseMapWidget extends StatefulWidget {
   final double latitude;
   final double longitude;
 
-  const HouseMapWidget({super.key, required this.latitude, required this.longitude});
+  const HouseMapWidget(
+      {super.key, required this.latitude, required this.longitude});
 
   @override
   _HouseMapWidgetState createState() => _HouseMapWidgetState();
@@ -25,6 +29,10 @@ class _HouseMapWidgetState extends State<HouseMapWidget> {
 
   @override
   Widget build(BuildContext context) {
+    /// Builds the HouseMapWidget UI, which includes:
+    /// - A Google Map centered on the house's location.
+    /// - A marker indicating the house's position.
+    /// - The ability to launch navigation to the house's location when the marker or map is tapped.
     return Container(
       height: 300.h,
       padding: const EdgeInsets.all(5.0),

@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'Provider/houseProvider.dart';
+import '../Provider/houseProvider.dart';
+import '../widgets/houseWidget.dart';
+import '../widgets/noResultsWidget.dart';
 import 'houseDetailPage.dart';
-import 'widgets/houseWidget.dart';
-import 'widgets/noResultsWidget.dart';
 
+/// HomePage displays the main screen for listing real estate houses.
+/// It allows users to search for houses, view filtered results, and navigate to house details.
+/// The page includes a search bar and a list of filtered houses.
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -14,6 +17,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  /// Builds the HomePage UI, which includes:
+  /// - A search bar for filtering homes.
+  /// - A list of homes, or an indicator if no results are found.
+  /// - Navigation to the house detail page when a house is selected.
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,16 +37,22 @@ class _HomePageState extends State<HomePage> {
         ),
         centerTitle: false,
       ),
+
+      /// Uses Consumer to listen to HouseProvider and update UI based on internet connection status and house data.
       body: Consumer<HouseProvider>(
         builder: (context, houseProvider, child) {
+          /// Displays a message if there is no internet connection.
           if (!houseProvider.hasConnection) {
             return noInternetWidget();
           }
 
+          /// Displays the house search bar and a list of filtered homes.
           return Column(
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
+
+                /// Search bar allows users to filter houses by text input.
                 child: TextField(
                   decoration: InputDecoration(
                     hintText: 'Search for a home',
@@ -58,17 +71,25 @@ class _HomePageState extends State<HomePage> {
                   },
                 ),
               ),
+
+              /// Displays a loading indicator while house data is being fetched.
+              /// If no houses match the search, a NoResultsWidget is shown.
               Expanded(
                 child: houseProvider.isLoading
                     ? const Center(child: CircularProgressIndicator())
                     : houseProvider.filteredHouses.isEmpty
                         ? const NoResultsWidget()
+
+                        /// Displays a list of filtered houses. Each house navigates to HouseDetailsPage when tapped.
+
                         : ListView.builder(
                             itemCount: houseProvider.filteredHouses.length,
                             itemBuilder: (context, index) {
                               final house = houseProvider.filteredHouses[index];
                               return GestureDetector(
                                 onTap: () {
+                                  /// Navigates to HouseDetailsPage when a house is selected.
+
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
