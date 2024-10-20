@@ -4,8 +4,8 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'Provider/houseProvider.dart';
-import 'homepage.dart';
-import 'informationPage.dart';
+import 'screens/homepage.dart';
+import 'screens/informationPage.dart';
 
 void main() {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();

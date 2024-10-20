@@ -4,14 +4,15 @@ import 'package:http/http.dart' as http;
 
 import '../model/houseModel.dart';
 
+///[ApiService] used for handling backend service api calls.
+///
 class ApiService {
-  static var getHouseUrl  = Constants.baseUrl + Constants.getHouseList;
-  Map<String, String> requestHeaders = {
-    'Access-Key': Constants.accessKey
-  };
+  static var getHouseUrl = Constants.baseUrl + Constants.getHouseList;
+  Map<String, String> requestHeaders = {'Access-Key': Constants.accessKey};
 
   Future<List<House>> fetchHouses() async {
-    final response = await http.get(Uri.parse(getHouseUrl), headers: requestHeaders);
+    final response =
+        await http.get(Uri.parse(getHouseUrl), headers: requestHeaders);
 
     if (response.statusCode == 200) {
       List jsonResponse = json.decode(response.body);

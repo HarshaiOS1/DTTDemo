@@ -1,3 +1,4 @@
+import 'package:dtt/screens/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geolocator/geolocator.dart';
@@ -7,6 +8,8 @@ import '../model/houseModel.dart';
 import '../services/constants.dart';
 import '../provider/locationProvider.dart';
 
+/// Displays a card widget containing house details in the list of houses in [HomePage].
+/// Accepts a [House] object as a required parameter.
 class HouseWidget extends StatefulWidget {
   final House house;
 
@@ -25,6 +28,9 @@ class _HouseWidgetState extends State<HouseWidget> {
     _calculateDistance();
   }
 
+  /// Calculates the distance between the user's current location and the house location.
+  /// Retrieves the current location from the [LocationProvider], then calculates the distance
+  /// in kilometers using the [Geolocator] package.
   void _calculateDistance() {
     final locationProvider =
         Provider.of<LocationProvider>(context, listen: false);
@@ -52,6 +58,8 @@ class _HouseWidgetState extends State<HouseWidget> {
         fontWeight: FontWeight.w400,
         color: Colors.grey);
 
+    /// Returns a card containing house information such as price, location,
+    ///size, number of bedrooms and bathrooms, and the distance to the house.
     return Card(
       margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
       child: Padding(

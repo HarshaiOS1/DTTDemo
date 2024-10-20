@@ -2,7 +2,9 @@ import 'dart:io' show Platform;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+///Utility class to write some of the reusable functions like open third party apps or do reusable calculation .
 class Utils {
+  ///Opens google maps or apple maps depending on the platform user is in, in case of error webpage is opened with google maps
   static Future<void> launchMaps(LatLng location) async {
     String encodedLatitude = Uri.encodeComponent(location.latitude.toString());
     String encodedLongitude =
