@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dtt/screens/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -71,9 +72,18 @@ class _HouseWidgetState extends State<HouseWidget> {
               height: 100.h,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(7.0),
-                child: Image.network(
-                  Constants.baseUrl + widget.house.image,
+                child: CachedNetworkImage(
+                  imageUrl: Constants.baseUrl + widget.house.image,
                   fit: BoxFit.cover,
+                  placeholder: (context, url) => SizedBox(
+                    height: 20.h,
+                    width: 20.w,
+                    child: const Center(
+                        child: CircularProgressIndicator(
+                      strokeWidth: 1,
+                    )),
+                  ),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               ),
             ),
