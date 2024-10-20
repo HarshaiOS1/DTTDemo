@@ -43,7 +43,8 @@ dependencies:
   google_maps_flutter:
   intl:
   geolocator:
-  connectivity_plus: ^6.1.0
+  connectivity_plus:
+  cached_network_image:
 
 dev_dependencies:
   flutter_test:
