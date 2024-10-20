@@ -2,12 +2,13 @@ import 'package:dtt/services/constants.dart';
 import 'package:dtt/widgets/houseMapWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'model/houseModel.dart';
 
 class HouseDetailsPage extends StatefulWidget {
   final House house;
 
-  HouseDetailsPage({required this.house});
+  const HouseDetailsPage({super.key, required this.house});
 
   @override
   _HouseDetailsPageState createState() => _HouseDetailsPageState();
@@ -28,16 +29,15 @@ class _HouseDetailsPageState extends State<HouseDetailsPage> {
                   width: double.infinity,
                   fit: BoxFit.cover,
                 ),
-                // House Details
                 Padding(
-                  padding: EdgeInsets.all(16.0),
+                  padding: EdgeInsets.all(16.sp),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         children: [
                           Text(
-                            '\$${widget.house.price}',
+                            '\$${NumberFormat('#,##0').format(widget.house.price)}',
                             style: TextStyle(
                               fontSize: 20.sp,
                               fontWeight: FontWeight.bold,
@@ -93,7 +93,6 @@ class _HouseDetailsPageState extends State<HouseDetailsPage> {
               ],
             ),
           ),
-          // Back Button
           Positioned(
             top: 40.h,
             left: 16.w,

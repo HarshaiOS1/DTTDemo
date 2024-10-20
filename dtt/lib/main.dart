@@ -1,3 +1,4 @@
+import 'package:dtt/provider/locationProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,8 +15,12 @@ void main() {
       providers: [
         ChangeNotifierProvider(
           create: (context) => HouseProvider()..loadHouses(),
-          child: MyApp(),
-        ),      ],
+          child: const MyApp(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => LocationProvider(),
+        ),
+      ],
       child: const MyApp(),
     ),
   );
@@ -63,7 +68,9 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
     FlutterNativeSplash.remove();
   }
 
-  List<Widget> get _widgetOptions => <Widget>[HomePage(), InformationPage()];
+  List<Widget> get _widgetOptions =>
+      <Widget>[const HomePage(), const InformationPage()];
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
