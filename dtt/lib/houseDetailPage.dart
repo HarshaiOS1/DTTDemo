@@ -93,7 +93,6 @@ class _HouseDetailsPageState extends State<HouseDetailsPage> {
               ],
             ),
           ),
-          // Back Button
           Positioned(
             top: 40.h,
             left: 16.w,

@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../model/houseModel.dart';
 import '../services/constants.dart';
-import '../provider/locationProvider.dart'; // Make sure this is the right import path
+import '../provider/locationProvider.dart';
 
 class HouseWidget extends StatefulWidget {
   final House house;

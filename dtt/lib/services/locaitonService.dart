@@ -4,12 +4,12 @@ import 'package:geolocator/geolocator.dart';
 class LocationService {
   static final LocationService _instance = LocationService._internal();
 
-  factory LocationService() {
-    return _instance;
-  }
+  factory LocationService() => _instance;
+
   LocationService._internal();
-  static const int locationUpdateTimeLimit = 15;
-  static const double locationUpdateDistanceLimit = 5000;
+
+  static const int locationUpdateTimeLimitInMinutes = 15;
+  static const double locationUpdateDistanceLimitInMeters = 5000;
 
   Future<Position?> getCurrentLocation({
     Position? cachedPosition,
@@ -17,8 +17,7 @@ class LocationService {
   }) async {
     if (_shouldUpdateLocation(cachedPosition, lastUpdatedTime)) {
       try {
-        Position position = await _determinePosition();
-        return position;
+        return await _determinePosition();
       } catch (e) {
         if (kDebugMode) {
           print("Error getting location: $e");
@@ -31,49 +30,36 @@ class LocationService {
 
   bool _shouldUpdateLocation(
       Position? cachedPosition, DateTime? lastUpdatedTime) {
-    if (cachedPosition == null) {
+    if (cachedPosition == null || _isTimeLimitExceeded(lastUpdatedTime)) {
       return true;
-    }
-
-    if (lastUpdatedTime != null) {
-      final duration = DateTime.now().difference(lastUpdatedTime);
-      if (duration.inMinutes > locationUpdateTimeLimit) {
-        return true;
-      }
     }
     return false;
   }
 
-  Future<Position> _determinePosition() async {
-    bool serviceEnabled;
-    LocationPermission permission;
+  bool _isTimeLimitExceeded(DateTime? lastUpdatedTime) {
+    if (lastUpdatedTime == null) return true;
+    return DateTime.now().difference(lastUpdatedTime).inMinutes > locationUpdateTimeLimitInMinutes;
+  }
 
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      return Future.error('Location services are disabled.');
+  Future<Position> _determinePosition() async {
+    if (!await Geolocator.isLocationServiceEnabled()) {
+      throw Exception('Location services are disabled.');
     }
 
-    permission = await Geolocator.checkPermission();
+    LocationPermission permission = await Geolocator.checkPermission();
+
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        return Future.error('Location permissions are denied.');
+        throw Exception('Location permissions are denied.');
       }
     }
 
     if (permission == LocationPermission.deniedForever) {
-      return Future.error(
+      throw Exception(
           'Location permissions are permanently denied, we cannot request permissions.');
     }
-    return await Geolocator.getCurrentPosition();
-  }
 
-  bool hasMovedSignificantly(Position cachedPosition, Position newPosition) {
-    double distanceInMeters = Geolocator.distanceBetween(
-        cachedPosition.latitude,
-        cachedPosition.longitude,
-        newPosition.latitude,
-        newPosition.longitude);
-    return distanceInMeters > locationUpdateDistanceLimit;
+    return await Geolocator.getCurrentPosition();
   }
 }

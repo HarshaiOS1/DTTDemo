@@ -68,7 +68,9 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
     FlutterNativeSplash.remove();
   }
 
-  List<Widget> get _widgetOptions => <Widget>[const HomePage(), const InformationPage()];
+  List<Widget> get _widgetOptions =>
+      <Widget>[const HomePage(), const InformationPage()];
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
