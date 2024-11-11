@@ -14,10 +14,10 @@ class HouseMapWidget extends StatefulWidget {
       {super.key, required this.latitude, required this.longitude});
 
   @override
-  _HouseMapWidgetState createState() => _HouseMapWidgetState();
+  HouseMapWidgetState createState() => HouseMapWidgetState();
 }
 
-class _HouseMapWidgetState extends State<HouseMapWidget> {
+class HouseMapWidgetState extends State<HouseMapWidget> {
   late GoogleMapController _mapController;
   late LatLng _houseLocation;
 
@@ -38,7 +38,8 @@ class _HouseMapWidgetState extends State<HouseMapWidget> {
       padding: const EdgeInsets.all(5.0),
       alignment: Alignment.center,
       child: GoogleMap(
-        zoomControlsEnabled: true,
+        zoomControlsEnabled: false,
+        myLocationButtonEnabled: false,
         onMapCreated: (GoogleMapController controller) {
           _mapController = controller;
           _mapController.animateCamera(

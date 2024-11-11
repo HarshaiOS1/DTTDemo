@@ -1,11 +1,11 @@
-import 'package:dtt/provider/locationProvider.dart';
+import 'package:dtt/provider/location_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'Provider/houseProvider.dart';
+import 'Provider/house_provider.dart';
 import 'screens/homepage.dart';
-import 'screens/informationPage.dart';
+import 'screens/information_page.dart';
 
 void main() {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -80,22 +80,26 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
-      backgroundColor: Colors.white70,
-      bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-              icon: Icon(Icons.home, size: 30.sp), label: ""),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.info_outline, size: 30.sp), label: "")
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.grey.shade500,
-        onTap: _onItemTapped,
-      ),
-    );
+        body: Center(
+          child: _widgetOptions.elementAt(_selectedIndex),
+        ),
+        backgroundColor: Colors.white70,
+        bottomNavigationBar: SizedBox(
+          height: 98.h,
+          child: BottomNavigationBar(
+            items: <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.home, size: 30.sp), label: ""),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.info, size: 30.sp), label: "")
+            ],
+            currentIndex: _selectedIndex,
+            selectedItemColor: Colors.black,
+            unselectedItemColor: Colors.grey.shade500,
+            showUnselectedLabels: false,
+            showSelectedLabels: false,
+            onTap: _onItemTapped,
+          ),
+        ));
   }
 }

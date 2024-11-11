@@ -110,9 +110,10 @@ flutter:
           weight: 200
 
 flutter_native_splash:
-  color: "#e65541"
-  icon_background_color: "#e65541"
+  color: "#E65541"
+  icon_background_color: "#E65541"
   image: assets/images/launcher_icon.png
+#  background_image: assets/images/launcher_icon.png
   android: true
   ios: true
 
