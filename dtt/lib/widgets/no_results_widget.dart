@@ -1,3 +1,4 @@
+import 'package:dtt/services/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -17,11 +18,7 @@ class NoResultsWidget extends StatelessWidget {
           SizedBox(height: 10.h),
           Text(
             "No results found!\nPerhaps try another search?",
-            style: TextStyle(
-              fontSize: 16.sp,
-              fontWeight: FontWeight.w500,
-              color: Colors.grey,
-            ),
+            style: AppTextStyles.title03(color: Colors.grey),
             textAlign: TextAlign.center,
           ),
         ],

@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
-import '../services/locaitonService.dart';
+import '../services/location_service.dart';
 
 /// LocationProvider manages the current user's location and notifies listeners
 /// of any changes to the location.

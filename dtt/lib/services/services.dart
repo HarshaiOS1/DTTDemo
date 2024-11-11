@@ -1,8 +1,7 @@
 import 'dart:convert';
 import 'package:dtt/services/constants.dart';
 import 'package:http/http.dart' as http;
-
-import '../model/houseModel.dart';
+import '../model/house_model.dart';
 
 ///[ApiService] used for handling backend service api calls.
 ///
