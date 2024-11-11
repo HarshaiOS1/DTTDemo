@@ -1,13 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dtt/screens/homepage.dart';
+import 'package:dtt/services/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import '../model/houseModel.dart';
+import '../model/house_model.dart';
 import '../services/constants.dart';
-import '../provider/locationProvider.dart';
+import '../provider/location_provider.dart';
 
 /// Displays a card widget containing house details in the list of houses in [HomePage].
 /// Accepts a [House] object as a required parameter.
@@ -17,10 +18,10 @@ class HouseWidget extends StatefulWidget {
   const HouseWidget({super.key, required this.house});
 
   @override
-  _HouseWidgetState createState() => _HouseWidgetState();
+  HouseWidgetState createState() => HouseWidgetState();
 }
 
-class _HouseWidgetState extends State<HouseWidget> {
+class HouseWidgetState extends State<HouseWidget> {
   double? distance;
 
   @override
@@ -53,12 +54,6 @@ class _HouseWidgetState extends State<HouseWidget> {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle featureTextStyle = TextStyle(
-        fontSize: 10.sp,
-        fontFamily: 'GothamSSM',
-        fontWeight: FontWeight.w400,
-        color: Colors.grey);
-
     /// Returns a card containing house information such as price, location,
     ///size, number of bedrooms and bathrooms, and the distance to the house.
     return Card(
@@ -113,33 +108,44 @@ class _HouseWidgetState extends State<HouseWidget> {
                     children: [
                       Icon(Icons.bed_outlined, size: 16.sp, color: Colors.grey),
                       SizedBox(width: 2.w),
-                      Text('${widget.house.bedrooms}', style: featureTextStyle),
+                      Text('${widget.house.bedrooms}',
+                          style: AppTextStyles.subtitle(color: Colors.grey)),
                       SizedBox(width: 4.w),
                       Icon(Icons.bathtub_outlined,
                           size: 16.sp, color: Colors.grey),
                       SizedBox(width: 2.w),
                       Text('${widget.house.bathrooms}',
-                          style: featureTextStyle),
+                          style: AppTextStyles.subtitle(color: Colors.grey)),
                       SizedBox(width: 4.w),
                       Icon(Icons.layers_outlined,
                           size: 16.sp, color: Colors.grey),
                       SizedBox(width: 2.w),
-                      Text('${widget.house.size} m²', style: featureTextStyle),
+                      Text('${widget.house.size} m²',
+                          style: AppTextStyles.subtitle(color: Colors.grey)),
                       SizedBox(width: 4.w),
-                      Icon(Icons.pin_drop_outlined,
-                          size: 16.sp, color: Colors.grey),
-                      SizedBox(width: 2.w),
                       Consumer<LocationProvider>(
                         builder: (context, locationProvider, child) {
                           if (locationProvider.currentPosition != null) {
                             _calculateDistance();
-                            return Text(
-                              '${distance != null ? distance!.toStringAsFixed(2) : "..."} km',
-                              style: featureTextStyle,
-                            );
-                          } else {
-                            return Text('... km', style: featureTextStyle);
+                            if (distance != null) {
+                              return Row(
+                                children: [
+                                  Icon(
+                                    Icons.pin_drop_outlined,
+                                    size: 16.sp,
+                                    color: Colors.grey,
+                                  ),
+                                  SizedBox(width: 2.w),
+                                  Text(
+                                    "${distance!.toStringAsFixed(2)} km",
+                                    style: AppTextStyles.subtitle(
+                                        color: Colors.grey),
+                                  ),
+                                ],
+                              );
+                            }
                           }
+                          return Container();
                         },
                       ),
                     ],

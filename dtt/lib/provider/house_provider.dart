@@ -2,7 +2,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
-import '../model/houseModel.dart';
+import '../model/house_model.dart';
 import '../services/services.dart';
 
 /// A provider class for managing house data and connectivity status.
@@ -53,21 +53,25 @@ class HouseProvider extends ChangeNotifier {
   ///
   /// Updates the [_filteredHouses] list based on matches with the city or zip.
   void filterHouses(String query) {
-    _searchQuery = query.toLowerCase();
-    if (_searchQuery.isNotEmpty) {
-      _filteredHouses = _houses.where((house) {
-        final cityMatch = house.city.toLowerCase().contains(_searchQuery);
-        final zipMatch = house.zip.toLowerCase().contains(_searchQuery);
-        return cityMatch || zipMatch;
-      }).toList();
-    } else {
+    _searchQuery = query.trim().toLowerCase();
+    if (_searchQuery.isEmpty) {
       _filteredHouses = _houses;
+    } else {
+      final searchTerms =
+          _searchQuery.split(RegExp(r'(?<=\D)(?=\d)|(?<=\d)(?=\D)|\s+'));
+
+      _filteredHouses = _houses.where((house) {
+        final cityLower = house.city.toLowerCase();
+        final zipLower = house.zip.toLowerCase();
+        return searchTerms.any((term) {
+          return cityLower.contains(term) || zipLower.contains(term);
+        });
+      }).toList();
     }
     _filteredHouses.sort((a, b) => a.price.compareTo(b.price));
     notifyListeners();
   }
 
-  // TODO : create network provide and have other providers listen to network proxy provider
   /// Initializes connectivity status and sets up a listener for connectivity changes.
   Future<void> initializeConnectivity() async {
     List<ConnectivityResult> initialStatus =

@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 
 class House {
   int id;
@@ -55,6 +56,6 @@ class House {
     "city": city,
     "latitude": latitude,
     "longitude": longitude,
-    "createdDate": "${createdDate.year.toString().padLeft(4, '0')}-${createdDate.month.toString().padLeft(2, '0')}-${createdDate.day.toString().padLeft(2, '0')}",
+    "createdDate": DateFormat('yyyy-MM-dd').format(createdDate),
   };
 }
