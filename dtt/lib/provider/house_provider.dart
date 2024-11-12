@@ -1,7 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'dart:async';
-import 'package:flutter/material.dart';
 import '../model/house_model.dart';
 import '../services/services.dart';
 

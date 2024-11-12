@@ -45,6 +45,7 @@ dependencies:
   geolocator:
   connectivity_plus:
   cached_network_image:
+  scrollable_positioned_list:
 
 dev_dependencies:
   flutter_test:
